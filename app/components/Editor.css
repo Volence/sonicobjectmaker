@@ -1,0 +1,86 @@
+.editorContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.editorTitles {
+  display: flex;
+  width: 97.5%;
+  margin: 0 auto;
+}
+
+.editorTitles h1 {
+  display: inline-block;
+  width: 50%;
+}
+
+.codeContainer {
+  width: 48%;
+  border: 1px solid black;
+  background-color: white;
+  height: 82vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: auto;
+}
+
+.previewContainer {
+  width: 48%;
+  border: 1px solid black;
+  background-color: white;
+  height: 82vh;
+  color: black;
+  overflow: auto;
+}
+
+.codeContainer__basicLabelInput {
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: 1fr 3fr;
+  align-items: flex-start;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.codeContainer label {
+  color: black;
+  margin-left: 0.2rem;
+}
+
+.codeContainer input {
+  margin-right: 1rem;
+}
+
+.previewContainer__code {
+  margin-left: 2rem;
+}
+
+.previewContainer__spacer {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.codeContainer__createTaskButton {
+  color: white;
+  background-color: darkblue;
+  border: 1px solid black;
+  width: auto;
+  margin-right: auto;
+  padding: 0.4rem;
+  transition: 0.4s all;
+}
+
+.codeContainer__selectionBox {
+  margin-right: 1rem;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topBar__gameSelection {
+  margin-right: 0.4rem;
+}

@@ -1,0 +1,87 @@
+.container {
+  position: relative;
+  top: 30%;
+  left: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container h2 {
+  font-size: 5rem;
+}
+
+.container a {
+  font-size: 1.4rem;
+}
+
+.homepage__linkBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.homepage__uploadInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.homepage__uploadInput + label {
+  font-size: 1.25em;
+  font-weight: 4 00;
+  opacity: 0.75;
+  color: white;
+  display: inline-block;
+}
+
+.homepage__uploadInput:focus + label,
+.homepage__uploadInput + label:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.homepage__uploadInput:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.homepage__modal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+}
+
+.homepage__innerModalBox {
+  position: absolute;
+  width: 40vw;
+  height: 30vh;
+  background-color: lightgray;
+  top: 35%;
+  left: 30%;
+  box-shadow: 0 0 20px lightblue;
+}
+
+.homepage__innerModalText {
+  text-align: center;
+  margin-top: 0.8rem;
+  font-size: 24px;
+  color: black;
+  padding: 2rem;
+}
+
+.homepage__innerModalAcceptText {
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  padding: 0.4rem 0.8rem;
+  display: inline-block;
+  margin: 0 auto;
+}
