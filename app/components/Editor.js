@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import styles from './Editor.css';
@@ -14,13 +14,43 @@ const Editor = () => {
     const [renderFlags, setRenderFlags] = useState('4');
     const [collisionFlags, setCollisionFlags] = useState('');
     const [priority, setPriority] = useState('');
+    const [guideModal, setGuideModal] = useState('');
 
-    // const addNewTask = (e) => {
-    //     e.preventDefault();
-    // }
+    useEffect(() => {
+        if(guideModal) {
+            document.addEventListener("keydown", removeModalIfTrue(isCorrectKeyPressedToRemoveModal));
+        } else {
+            document.removeEventListener("keydown", removeModalIfTrue(isCorrectKeyPressedToRemoveModal));
+        }
+        return () => {
+            document.removeEventListener("keydown", removeModalIfTrue(isCorrectKeyPressedToRemoveModal));
+        };
+    }, [guideModal]);
+
+    const loadCollisionGuide = (e) => {
+        e.preventDefault();
+        setGuideModal(guideModalBase(collisionGuide));
+    }
+
+    const removeModalIfTrue = fn => arg => {
+        return fn(arg) === true ? setGuideModal('') : null;
+    }
+    const isCorrectAreaClickedToRemoveModal = ({target}) => !document.getElementById('modal').contains(target) ? true : false;
+    const isCorrectKeyPressedToRemoveModal = ({key}) => {
+        console.log('hey')
+      return  key === 'Enter'; 
+    } 
+
+    const guideModalBase = (innerContent) => <div onClick={removeModalIfTrue(isCorrectAreaClickedToRemoveModal)} className={styles.guideModal}>{innerContent}</div>;
+
+    const collisionGuide = 
+    <div id="modal" className={styles.guideModal__innerBox}>
+            <div className={styles.guideModal__innerText}>Please select from the following sizes:</div>
+            <div className={styles.guideModal__innerAcceptText}>Click anywhere to continue</div>
+    </div>;
 
     return(
-        <>
+        <div className={styles.container}  data-id="container">
             <div className={styles.topBar}>
                 <Link to={routes.HOME}>Return Home</Link>
                 <select value={gameSelected} defualtvalue="Sonic 2" onChange={e => setGameSelected(e.target.value)} className={styles.topBar__gameSelection}>
@@ -41,6 +71,7 @@ const Editor = () => {
                     <BasicObjectValuePair itemName="Art Tile:" itemValue={artTile} setItem={setArtTile} type="hex" />
                     <BasicObjectValuePair itemName="Render Flags:" itemValue={renderFlags} setItem={setRenderFlags} type="hex" />
                     <BasicObjectValuePair itemName="Collision Flags:" itemValue={collisionFlags} setItem={setCollisionFlags} type="hex" />
+                    <a className={styles.guideOpener} onClick={loadCollisionGuide}>Collision Guide</a>
                     <BasicObjectValuePair itemName="Priority:" itemValue={priority} setItem={setPriority} type="hex" />
                     <div className={styles.codeContainer__basicLabelInput}>
                         <div />
@@ -77,7 +108,8 @@ const Editor = () => {
                     <ConditionalCode mainItem={priority} code={`move.b	#${priority},priority(a0)`} />
                 </div>
             </div>
-        </>    
+            {guideModal}
+        </div>    
     );
 }
 

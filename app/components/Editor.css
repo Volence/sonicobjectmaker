@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .editorContainer {
   display: flex;
   justify-content: space-evenly;
@@ -83,4 +87,49 @@
 
 .topBar__gameSelection {
   margin-right: 0.4rem;
+}
+
+.guideModal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+}
+
+.guideModal__innerBox {
+  position: absolute;
+  width: 40vw;
+  height: 30vh;
+  background-color: lightgray;
+  top: 35%;
+  left: 30%;
+  box-shadow: 0 0 20px lightblue;
+}
+
+.guideModal__innerText {
+  text-align: center;
+  margin-top: 0.8rem;
+  font-size: 24px;
+  color: black;
+  padding: 2rem;
+}
+
+.guideModal__innerAcceptText {
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  padding: 0.4rem 0.8rem;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.guideOpener {
+  color: black;
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  margin-top: 0.4rem;
+  margin-left: 0.6rem;
+  border: 1px solid black;
 }
