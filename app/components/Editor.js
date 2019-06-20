@@ -32,9 +32,7 @@ const Editor = () => {
         setGuideModal(guideModalBase(collisionGuide));
     }
 
-    const removeModalIfTrue = fn => arg => {
-        return fn(arg) === true ? setGuideModal('') : null;
-    }
+    const removeModalIfTrue = fn => arg => fn(arg) === true ? setGuideModal('') : null;
     const isCorrectAreaClickedToRemoveModal = ({target}) => !document.getElementById('modal').contains(target) ? true : false;
     const isCorrectKeyPressedToRemoveModal = ({key}) => {
         console.log('hey')

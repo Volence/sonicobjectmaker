@@ -34,10 +34,7 @@ const Home = () => {
     }
   }
 
-  const removeModalIfTrue = fn => arg => {
-    return fn(arg) === true ? setModalLanguage('') : null;
-  }
-
+  const removeModalIfTrue = fn => arg => fn(arg) === true ? setModalLanguage('') : null;
   const isCorrectAreaClickedToRemoveModal = ({target}) => !document.getElementById('modal').contains(target) ? true : false;
   const isCorrectKeyPressedToRemoveModal = ({key}) => key === 'Enter';
   
