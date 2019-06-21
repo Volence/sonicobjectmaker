@@ -101,7 +101,7 @@
 .guideModal__innerBox {
   position: absolute;
   width: 40vw;
-  height: 30vh;
+  min-height: 30vh;
   background-color: lightgray;
   top: 35%;
   left: 30%;

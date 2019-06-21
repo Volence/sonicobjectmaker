@@ -15,17 +15,11 @@ const Editor = () => {
     const [collisionFlags, setCollisionFlags] = useState('');
     const [priority, setPriority] = useState('');
     const [guideModal, setGuideModal] = useState('');
+    const [collisionSize, setCollisionSize] = useState('0');
+    const [collisionType, setCollisionType] = useState('0');
 
-    useEffect(() => {
-        if(guideModal) {
-            document.addEventListener("keydown", removeModalIfTrue(isCorrectKeyPressedToRemoveModal));
-        } else {
-            document.removeEventListener("keydown", removeModalIfTrue(isCorrectKeyPressedToRemoveModal));
-        }
-        return () => {
-            document.removeEventListener("keydown", removeModalIfTrue(isCorrectKeyPressedToRemoveModal));
-        };
-    }, [guideModal]);
+    console.log("collision type", collisionType)
+    console.log("collision size", collisionSize)
 
     const loadCollisionGuide = (e) => {
         e.preventDefault();
@@ -34,17 +28,82 @@ const Editor = () => {
 
     const removeModalIfTrue = fn => arg => fn(arg) === true ? setGuideModal('') : null;
     const isCorrectAreaClickedToRemoveModal = ({target}) => !document.getElementById('modal').contains(target) ? true : false;
-    const isCorrectKeyPressedToRemoveModal = ({key}) => {
-        console.log('hey')
-      return  key === 'Enter'; 
-    } 
+    const isCorrectKeyPressedToRemoveModal = ({key}) => key === 'Enter'; 
 
     const guideModalBase = (innerContent) => <div onClick={removeModalIfTrue(isCorrectAreaClickedToRemoveModal)} className={styles.guideModal}>{innerContent}</div>;
 
+    const calculateCollision = e =>  {
+        e.preventDefault();
+        console.log("collision type", collisionType);
+        console.log("collision size", collisionSize);
+        console.log(parseInt(collisionType + collisionSize, 2).toString(16))
+        setCollisionFlags(parseInt(collisionType + collisionSize, 2).toString(16));
+        setGuideModal('');
+    }
+
     const collisionGuide = 
     <div id="modal" className={styles.guideModal__innerBox}>
-            <div className={styles.guideModal__innerText}>Please select from the following sizes:</div>
-            <div className={styles.guideModal__innerAcceptText}>Click anywhere to continue</div>
+        <form onSubmit={calculateCollision}>
+            <div className={styles.guideModal__innerText}>Please select from the following sizes (width x height):</div>
+            <select defualtvalue="000000" onChange={e => setCollisionSize(e.target.value)} className={styles.topBar__gameSelection}>
+                <option value="000000">4 x 4</option>
+                <option value="000111">6 x 6</option>
+                <option value="001011">8 x 8</option>
+                <option value="011010">$C x $C</option>
+                <option value="001110">$E x $E</option>
+                <option value="000001">$14 x $14</option>
+                <option value="001111">$18 x $18</option>
+                <option value="110001">2 x 8</option>
+                <option value="011110">4 x 8</option>
+                <option value="000100">4 x $10</option>
+                <option value="011111">4 x $18</option>
+                <option value="100000">4 x $28</option>
+                <option value="101000">4 x $40</option>
+                <option value="011011">8 x 4</option>
+                <option value="010010">8 x $10</option>
+                <option value="000010">$C x $14</option>
+                <option value="000011">$14 x $C</option>
+                <option value="000101">$C x $12</option>
+                <option value="000110">$10 x $10</option>
+                <option value="001000">$18 x $C</option>
+                <option value="001001">$C x $10</option>
+                <option value="001010">$10 x 8</option>
+                <option value="100011">$C x $18</option>
+                <option value="110000">$10 x 1</option>
+                <option value="101111">$10 x 2</option>
+                <option value="100110">$10 x 4</option>
+                <option value="010001">$10 x $18</option>
+                <option value="101011">$10 x $20</option>
+                <option value="101100">$10 x $30</option>
+                <option value="101101">$10 x $40</option>
+                <option value="101110">$10 x $50</option>
+                <option value="001101">$14 x 8</option>
+                <option value="001100">$14 x $10</option>
+                <option value="011100">$18 x 4</option>
+                <option value="100010">$18 x $18</option>
+                <option value="100101">$18 x $28</option>
+                <option value="101001">$18 x $80</option>
+                <option value="100111">$20 x 2</option>
+                <option value="011001">$20 x 8</option>
+                <option value="101010">$20 x $10</option>
+                <option value="110010">$20 x $1C</option>
+                <option value="010110">$20 x $20</option>
+                <option value="010011">$20 x $70</option>
+                <option value="011101">$28 x 4</option>
+                <option value="010000">$28 x $10</option>
+                <option value="010100">$40 x $20</option>
+                <option value="100100">$48 x 8</option>
+                <option value="010101">$80 x $20</option>
+            </select>
+            <div className={styles.guideModal__innerText}>Please select from the following types of collision:</div>
+            <select defualtvalue="00" onChange={e => setCollisionType(e.target.value)} className={styles.topBar__gameSelection}>
+                    <option value="00">Enemy</option>
+                    <option value="01">Set Routine Counter To 4</option>
+                    <option value="10">Harm</option>
+                    <option value="11">Special For Starpole</option>
+            </select>
+            <input type="submit" value="Submit"/>
+        </form>
     </div>;
 
     return(
